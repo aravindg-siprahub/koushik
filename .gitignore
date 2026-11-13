@@ -1,0 +1,14 @@
+node_modules
+.next
+.next-build
+.next-preview
+out
+.env*.local
+next-env.d.ts
+*.tsbuildinfo
+
+# raw source photos (optimised copies live in public/images)
+scripts/*.jpg
+scripts/*.webp
+# local tool settings
+.claude/
