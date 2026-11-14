@@ -12,3 +12,4 @@ scripts/*.jpg
 scripts/*.webp
 # local tool settings
 .claude/
+.vercel
