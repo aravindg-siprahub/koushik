@@ -170,3 +170,13 @@ body {
 }
 .hero-rise { animation: hero-rise 0.9s cubic-bezier(0.22, 1, 0.36, 1) both; }
 @media (prefers-reduced-motion: reduce) { .hero-rise { animation: none; } }
+
+/* Hero background video: never show the browser's own play overlay (iPhone shows one when autoplay waits). */
+.hero-bg-video::-webkit-media-controls,
+.hero-bg-video::-webkit-media-controls-start-playback-button,
+.hero-bg-video::-webkit-media-controls-overlay-play-button,
+.hero-bg-video::-webkit-media-controls-panel {
+  display: none !important;
+  -webkit-appearance: none;
+  opacity: 0 !important;
+}

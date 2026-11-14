@@ -1,10 +1,10 @@
 "use client";
 
 import { motion, useReducedMotion, useScroll, useTransform } from "framer-motion";
-import { ChevronDown } from "lucide-react";
 import { useRef } from "react";
 import { blessing, couple, dateRangeLabel } from "@/config/wedding";
 import { HeroSlideshow } from "./HeroSlideshow";
+import { ScrollHint } from "./ScrollHint";
 import { Diya, Divider, Ganesha, JasmineStrand, Lotus, Toran } from "./Motifs";
 
 function AnimatedName({ text, delay, className }: { text: string; delay: number; className?: string }) {
@@ -152,15 +152,7 @@ export function HeroSection() {
         </div>
       </motion.div>
 
-      <motion.a
-        href="#blessings"
-        aria-label="Scroll to blessings"
-        className="focus-ring absolute bottom-3 left-6 hidden text-gold lg:block"
-        animate={reduce ? undefined : { y: [0, 8, 0] }}
-        transition={{ duration: 2, repeat: Infinity }}
-      >
-        <ChevronDown className="h-7 w-7" />
-      </motion.a>
+      <ScrollHint target="blessings" />
     </section>
   );
 }
