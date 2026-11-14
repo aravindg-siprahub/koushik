@@ -96,7 +96,7 @@ export function HeroSection() {
                 filter: "drop-shadow(0 2px 1px rgb(40 4 14 / 0.9)) drop-shadow(0 0 16px rgb(242 185 43 / 0.35))",
               }}
             >
-              పెనుగొండ వారి పెళ్లి పిలుపు
+              పెనుగొండ వారి పెండ్లి పిలుపు
             </p>
             <div className="mt-1 flex items-center justify-center gap-2">
               <span className="hidden h-px w-14 bg-gradient-to-r from-transparent to-gold sm:block" aria-hidden="true" />
