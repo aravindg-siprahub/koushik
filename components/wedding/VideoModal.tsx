@@ -11,8 +11,18 @@ export const VIDEO_EVENT = "ks:video";
 export type VideoEventDetail = "play" | "stop";
 const announce = (d: VideoEventDetail) => window.dispatchEvent(new CustomEvent<VideoEventDetail>(VIDEO_EVENT, { detail: d }));
 
-/** Full-screen player for the invitation video, with sound. Back / ✕ / Escape / outside tap closes it. */
-export function VideoModal({ open, onClose }: { open: boolean; onClose: () => void }) {
+type VideoSource = { src: string; poster?: string; title: string };
+
+/** Full-screen player for an invitation video (the main one by default), with sound. Back / ✕ / Escape / outside tap closes it. */
+export function VideoModal({
+  open,
+  onClose,
+  source = { src: video.full, poster: video.poster, title: video.title },
+}: {
+  open: boolean;
+  onClose: () => void;
+  source?: VideoSource;
+}) {
   const [mounted, setMounted] = useState(false);
   const onCloseRef = useRef(onClose);
   const openRef = useRef(open);
@@ -63,7 +73,7 @@ export function VideoModal({ open, onClose }: { open: boolean; onClose: () => vo
         <motion.div
           role="dialog"
           aria-modal="true"
-          aria-label={video.title}
+          aria-label={source.title}
           className="fixed inset-0 z-[100] flex items-center justify-center bg-[#1a0309]/95 p-3 backdrop-blur-sm"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
@@ -71,9 +81,9 @@ export function VideoModal({ open, onClose }: { open: boolean; onClose: () => vo
           onClick={() => onCloseRef.current()}
         >
           <motion.video
-            key="invitation-video"
-            src={video.full}
-            poster={video.poster}
+            key={source.src}
+            src={source.src}
+            poster={source.poster}
             controls
             autoPlay
             playsInline

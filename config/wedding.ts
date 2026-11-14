@@ -186,7 +186,8 @@ export const schedule: EventDay[] = [
  * Do not add or rephrase lines here.
  */
 export const printedCard = {
-  photo: "/images/printed-invitation.jpg",
+  /** Cinematic film of the printed card, opened from the button under the invitation. */
+  video: { src: "/videos/invitation-card.mp4", poster: "/videos/invitation-card-poster.jpg", title: "Our wedding invitation card video" },
   blessing: "శ్రీరస్తు - శుభమస్తు - అవిఘ్నమస్తు",
   title: "వివాహ మహోత్సవ ఆహ్వాన శుభపత్రిక",
   shloka: ["శ్లో॥ శ్రీరామపత్నీ జనకస్య పుత్రీ సీతాంగనా సుందర కోమలాంగీ ।", "భూగర్భజాతా భువనైకమాతా, వధూవరాభ్యాం వరదాస్తు నిత్యమ్ ॥"],

@@ -1,29 +1,32 @@
 "use client";
 
-import { Eye } from "lucide-react";
+import { Play } from "lucide-react";
 import { useState } from "react";
 import { printedCard } from "@/config/wedding";
-import { Lightbox } from "./Lightbox";
+import { VideoModal } from "./VideoModal";
 
-/** Opens a photograph of the family's printed invitation card. */
+/** Plays the cinematic video of the family's printed invitation card (శుభలేఖ). */
 export function PrintedCardButton() {
-  const [open, setOpen] = useState<number | null>(null);
+  const [open, setOpen] = useState(false);
   return (
     <>
       <button
         type="button"
-        onClick={() => setOpen(0)}
-        className="focus-ring inline-flex min-h-11 items-center gap-2 rounded-full border border-maroon/40 px-5 font-display text-[0.68rem] tracking-[0.2em] text-maroon uppercase transition hover:bg-maroon hover:text-champagne"
+        onClick={() => setOpen(true)}
+        aria-haspopup="dialog"
+        className="focus-ring group inline-flex min-h-12 items-center gap-3 rounded-full border border-maroon/40 py-1.5 pr-6 pl-1.5 text-maroon transition hover:bg-maroon hover:text-champagne"
       >
-        <Eye className="h-4 w-4" aria-hidden="true" />
-        View printed card
+        <span className="grid h-9 w-9 shrink-0 place-items-center rounded-full bg-gradient-to-b from-[#d8b061] to-[#b0843a] text-burgundy shadow-md transition group-hover:scale-105" aria-hidden="true">
+          <Play className="ml-0.5 h-4 w-4 fill-current" />
+        </span>
+        <span className="flex flex-col items-start leading-tight">
+          <span className="font-display text-[0.68rem] tracking-[0.2em] uppercase">Watch Invitation Video</span>
+          <span lang="te" className="font-telugu text-[0.78rem] opacity-80">
+            శుభలేఖ వీడియో చూడండి
+          </span>
+        </span>
       </button>
-      <Lightbox
-        images={[{ src: printedCard.photo, alt: "The printed Telugu wedding invitation card", w: 1400, h: 973 }]}
-        index={open}
-        onClose={() => setOpen(null)}
-        onIndex={setOpen}
-      />
+      <VideoModal open={open} onClose={() => setOpen(false)} source={printedCard.video} />
     </>
   );
 }
