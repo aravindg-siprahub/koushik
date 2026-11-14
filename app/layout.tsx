@@ -3,7 +3,7 @@ import { site } from "@/config/wedding";
 import "./globals.css";
 
 const FONTS_URL =
-  "https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Great+Vibes&family=Noto+Serif+Telugu:wght@400;600&display=swap";
+  "https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Great+Vibes&family=Noto+Serif+Telugu:wght@400;600&family=Ramaraja&display=swap";
 
 export const metadata: Metadata = {
   metadataBase: new URL(

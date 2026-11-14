@@ -5,7 +5,7 @@ import { ChevronDown } from "lucide-react";
 import { useRef } from "react";
 import { blessing, couple, dateRangeLabel } from "@/config/wedding";
 import { HeroSlideshow } from "./HeroSlideshow";
-import { Diya, Divider, Ganesha, JasmineStrand, Toran } from "./Motifs";
+import { Diya, Divider, Ganesha, JasmineStrand, Lotus, Toran } from "./Motifs";
 
 function AnimatedName({ text, delay, className }: { text: string; delay: number; className?: string }) {
   return (
@@ -82,11 +82,31 @@ export function HeroSection() {
         <div
           className="mx-auto w-full max-w-3xl px-6"
         >
-          <div className="hero-rise mx-auto mt-1 mb-3 inline-flex flex-col items-center rounded-2xl border border-gold/70 bg-burgundy/70 px-5 py-2 shadow-[0_10px_30px_-12px_rgb(0_0_0/0.7)] backdrop-blur-sm">
-            <p lang="te" className="font-telugu text-[1.6rem] leading-tight font-semibold text-champagne sm:text-4xl">
+          {/* family title: classical Telugu lettering in gold, on a soft glow so it reads over the video */}
+          <div className="hero-rise relative mx-auto mt-1 mb-4 w-fit max-w-full px-2">
+            <span
+              className="absolute -inset-x-6 -inset-y-3 -z-10 rounded-full bg-[radial-gradient(ellipse_at_center,rgb(40_4_14/0.7)_0%,rgb(40_4_14/0.4)_50%,transparent_75%)] blur-md"
+              aria-hidden="true"
+            />
+            <p
+              lang="te"
+              className="gold-text px-2 font-telugu-display leading-[1.25]"
+              style={{
+                fontSize: "clamp(1.5rem, 8vw, 3.75rem)",
+                filter: "drop-shadow(0 2px 1px rgb(40 4 14 / 0.9)) drop-shadow(0 0 16px rgb(242 185 43 / 0.35))",
+              }}
+            >
               పెనుగొండ వారి పెళ్లి పిలుపు
             </p>
-            <p className="mt-0.5 font-display text-[0.62rem] tracking-[0.32em] text-gold uppercase sm:text-xs">Penugonda vari Pendli Pilupu</p>
+            <div className="mt-1 flex items-center justify-center gap-2">
+              <span className="hidden h-px w-14 bg-gradient-to-r from-transparent to-gold sm:block" aria-hidden="true" />
+              <Lotus className="h-3 w-6 shrink-0" color="#E8D3A0" />
+              <span className="font-display text-[0.6rem] tracking-[0.28em] whitespace-nowrap text-champagne uppercase sm:text-xs">
+                Penugonda vari Pendli Pilupu
+              </span>
+              <Lotus className="h-3 w-6 shrink-0" color="#E8D3A0" />
+              <span className="hidden h-px w-14 bg-gradient-to-l from-transparent to-gold sm:block" aria-hidden="true" />
+            </div>
           </div>
           <p style={{ animationDelay: "0.2s" }} className="hero-rise mx-auto max-w-xl text-lg leading-snug text-cream/90 italic">
             With the blessings of our elders and hearts full of joy, we warmly invite you to the wedding celebrations of
