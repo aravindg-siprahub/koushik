@@ -18,7 +18,6 @@ export function MusicPlayer({ tracks }: { tracks: Track[] }) {
   const userPaused = useRef(false);
   const [index, setIndex] = useState(0);
   const [playing, setPlaying] = useState(false);
-  const [waiting, setWaiting] = useState(false);
   const [announce, setAnnounce] = useState(false);
   const track = tracks[index] ?? null;
 
@@ -33,7 +32,6 @@ export function MusicPlayer({ tracks }: { tracks: Track[] }) {
         el.volume = Math.min(target, el.volume + target / 20);
         if (el.volume >= target) window.clearInterval(id);
       }, 80);
-      setWaiting(false);
       return true;
     } catch {
       return false;
@@ -60,7 +58,7 @@ export function MusicPlayer({ tracks }: { tracks: Track[] }) {
     play().then((ok) => {
       if (ok) done = true;
       else {
-        setWaiting(true);
+        // No "tap for music" label: the song simply starts on the guest's first tap anywhere.
         events.forEach((e) => document.addEventListener(e, onInteract, { capture: true, passive: true }));
       }
     });
@@ -124,22 +122,10 @@ export function MusicPlayer({ tracks }: { tracks: Track[] }) {
       />
       <div
         data-music-control=""
-        className="fixed z-40 flex items-center gap-2"
+        className="fixed z-40 flex flex-col items-end gap-2"
         style={{ right: "max(12px, env(safe-area-inset-right))", bottom: "max(14px, env(safe-area-inset-bottom))" }}
       >
         <AnimatePresence>
-          {waiting && !playing && (
-            <motion.button
-              type="button"
-              onClick={toggle}
-              initial={{ opacity: 0, x: 12 }}
-              animate={{ opacity: 1, x: 0 }}
-              exit={{ opacity: 0, x: 12 }}
-              className="focus-ring rounded-full border border-gold/60 bg-burgundy/90 px-4 py-2 font-serif text-sm whitespace-nowrap text-champagne shadow-lg backdrop-blur"
-            >
-              🎵 Tap for wedding music
-            </motion.button>
-          )}
           {playing && announce && (
             <motion.p
               initial={{ opacity: 0, x: 12 }}
