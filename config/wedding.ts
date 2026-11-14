@@ -53,9 +53,9 @@ export const couple = {
   groom: {
     firstName: "Koushik",
     fullName: "Penugonda Koushik",
-    telugu: "కౌశిక్",
+    telugu: "కౌషిక్",
     qualification: "B.Tech",
-    parents: "Sri Penugonda Venkata Seshagiri & Smt. Sowjanya",
+    parents: "Sri Penugonda Venkata Seshagiri & Smt. Soujanya",
     relation: "Beloved son of",
   },
   bride: {
@@ -145,8 +145,8 @@ export const schedule: EventDay[] = [
     day: "15",
     weekday: "Sunday",
     events: [
-      { id: "haldi", name: "Haldi", telugu: "పసుపు", start: "2026-11-15T09:00:00+05:30", timeLabel: "9:00 AM", icon: "haldi", venue: "chirala" },
-      { id: "sangeeth", name: "Sangeeth", telugu: "సంగీత్", start: "2026-11-15T19:00:00+05:30", timeLabel: "7:00 PM", icon: "sangeeth", venue: "chirala" },
+      { id: "haldi", name: "Haldi", telugu: "పసుపు", start: "2026-11-15T10:00:00+05:30", timeLabel: "10:00 AM", icon: "haldi", venue: "chirala" },
+      { id: "sangeeth", name: "Sangeeth", telugu: "సంగీత్", start: "2026-11-15T18:00:00+05:30", timeLabel: "6:00 PM", icon: "sangeeth", venue: "chirala" },
     ],
   },
   {
@@ -166,7 +166,7 @@ export const schedule: EventDay[] = [
     day: "21",
     weekday: "Saturday",
     events: [
-      { id: "wedding", name: "Wedding Ceremony", telugu: "శుభ ముహూర్తం", start: muhurtham.iso, timeLabel: "8:52 PM", note: "Muhurtham", icon: "wedding", venue: "kalyanaVedika", highlight: true },
+      { id: "wedding", name: "Wedding Ceremony", telugu: "శుభ ముహూర్తం", start: muhurtham.iso, timeLabel: "8:52 PM", note: "Muhurtham", icon: "wedding", venue: "kalyanaVedika" },
     ],
   },
   {
@@ -176,15 +176,10 @@ export const schedule: EventDay[] = [
     weekday: "Sunday",
     events: [
       { id: "vratham", name: "Sri Satyanarayana Swamy Vratham", telugu: "సత్యనారాయణ వ్రతం", start: "2026-11-22T09:00:00+05:30", timeLabel: "9:00 AM", icon: "vratham", venue: "megaConvention" },
-      { id: "reception", name: "Reception", telugu: "రిసెప్షన్ & విందు", start: "2026-11-22T20:00:00+05:30", timeLabel: "8:00 PM", icon: "reception", venue: "megaConvention" },
+      { id: "reception", name: "Reception", telugu: "రిసెప్షన్ & విందు", start: "2026-11-22T20:00:00+05:30", timeLabel: "8:00 PM", icon: "reception", venue: "megaConvention", highlight: true },
     ],
   },
 ];
-
-export const hospitality = {
-  items: ["Accommodation", "Breakfast", "Lunch", "Dinner"],
-  note: "Arrangements are made on all days for the comfort and convenience of our guests.",
-};
 
 /**
  * Text of the family's printed invitation card — reproduced exactly as printed.
@@ -200,7 +195,7 @@ export const printedCard = {
     lines: ["ది. 19-11-2026 గురువారం", "ఉదయం గం॥ 11-40 ని॥లకు", "నరసరావుపేట, కోట బజారులోని", "మా స్వగృహము నందు"],
   },
   onlySon: "మా ఏకైక పుత్రుడు",
-  groom: { label: "వరుడు :", prefix: "చి॥", name: "కౌశిక్", suffix: "B.Tech. కు" },
+  groom: { label: "వరుడు :", prefix: "చి॥", name: "కౌషిక్", suffix: "B.Tech. కు" },
   bride: { label: "వధువు :", prefix: "చి॥ల॥సౌ॥", name: "వల్లీ శ్రీజ", suffix: "B.Tech. ను" },
   brideParents: "(బాపట్ల పట్టణ వాస్తవ్యులు శ్రీ తటవర్తి సురేష్ & శ్రీమతి లక్ష్మి గార్ల ఏకైక పుత్రిక)",
   decided: "ఇచ్చి వివాహము జరుపుటకు దైవజ్ఞులు సుముహూర్తం నిశ్చయించినారు.",

@@ -33,7 +33,7 @@ function EventRow({ event, festive }: { event: WeddingEvent; festive: boolean })
       <span
         className={`grid shrink-0 place-items-center rounded-full border border-gold/60 shadow-[inset_0_0_0_3px_rgb(255_255_255/0.6)] ${
           festive ? "h-16 w-16 sm:h-20 sm:w-20" : "h-12 w-12 sm:h-14 sm:w-14"
-        }`}
+        } ${event.highlight ? "ring-2 ring-gold ring-offset-2 ring-offset-burgundy shadow-[0_0_28px_rgb(242_185_43/0.55)]" : ""}`}
         style={{ backgroundColor: TINT[event.icon] }}
         aria-hidden="true"
       >
@@ -43,6 +43,11 @@ function EventRow({ event, festive }: { event: WeddingEvent; festive: boolean })
         <span className={`block font-display leading-snug tracking-wide ${festive ? "text-lg text-champagne sm:text-xl" : "text-[0.98rem] text-maroon sm:text-[1.05rem]"}`}>
           {event.name}
         </span>
+        {event.highlight && (
+          <span className="mt-1 mb-0.5 inline-flex items-center gap-1 rounded-full border border-gold/70 bg-gradient-to-r from-[#e6c477] to-[#b88a3c] px-2 py-0.5 font-display text-[0.55rem] tracking-[0.12em] whitespace-nowrap text-burgundy uppercase shadow-[0_0_18px_rgb(242_185_43/0.45)]">
+            ✦ Grand Celebration
+          </span>
+        )}
         <span lang="te" className={`block font-telugu text-[0.85rem] ${festive ? "text-cream/80" : "text-ink/60"}`}>
           {event.telugu}
           {event.note ? <span className={`font-serif italic ${festive ? "text-gold-light" : "text-gold"}`}> · {event.note}</span> : null}
@@ -64,7 +69,8 @@ function EventRow({ event, festive }: { event: WeddingEvent; festive: boolean })
 }
 
 function DayPanel({ day, number }: { day: EventDay; number: number }) {
-  const festive = day.events.some((e) => e.highlight);
+  const star = day.events.find((e) => e.highlight);
+  const festive = Boolean(star);
   const first = Date.parse(day.events[0].start);
   const last = Date.parse(day.events[day.events.length - 1].start);
   const spanH = (last - first) / 3_600_000 + 3;
@@ -100,7 +106,7 @@ function DayPanel({ day, number }: { day: EventDay; number: number }) {
           <div className="min-w-0 flex-1">
             <p className={`font-display text-[0.58rem] tracking-[0.3em] uppercase ${festive ? "text-gold-light" : "text-gold"}`}>Day {number} of 4</p>
             <h3 className={`font-display text-xl leading-tight tracking-wide ${festive ? "text-champagne" : "text-maroon"}`}>
-              {festive ? <span className="gold-text -ml-0.5 inline-block px-0.5 font-script text-4xl tracking-normal">The Wedding</span> : day.weekday}
+              {star ? <span className="gold-text -ml-0.5 inline-block px-0.5 font-script text-4xl tracking-normal">The {star.name}</span> : day.weekday}
             </h3>
             <p lang="te" className={`font-telugu text-sm ${festive ? "text-cream/75" : "text-ink/55"}`}>
               {TELUGU_DAY[day.weekday]}

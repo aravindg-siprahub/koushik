@@ -82,6 +82,12 @@ export function HeroSection() {
         <div
           className="mx-auto w-full max-w-3xl px-6"
         >
+          <div className="hero-rise mx-auto mt-1 mb-3 inline-flex flex-col items-center rounded-2xl border border-gold/70 bg-burgundy/70 px-5 py-2 shadow-[0_10px_30px_-12px_rgb(0_0_0/0.7)] backdrop-blur-sm">
+            <p lang="te" className="font-telugu text-[1.6rem] leading-tight font-semibold text-champagne sm:text-4xl">
+              పెనుగొండ వారి పెళ్లి పిలుపు
+            </p>
+            <p className="mt-0.5 font-display text-[0.62rem] tracking-[0.32em] text-gold uppercase sm:text-xs">Penugonda vari Pendli Pilupu</p>
+          </div>
           <p style={{ animationDelay: "0.2s" }} className="hero-rise mx-auto max-w-xl text-lg leading-snug text-cream/90 italic">
             With the blessings of our elders and hearts full of joy, we warmly invite you to the wedding celebrations of
           </p>
@@ -105,8 +111,8 @@ export function HeroSection() {
 
           <div style={{ animationDelay: "1.7s" }} className="hero-rise mt-5 flex flex-col items-center justify-center gap-4 sm:flex-row sm:gap-5">
             <div className="inline-flex flex-col items-center rounded-2xl border border-gold/50 bg-burgundy/55 px-6 py-2.5 backdrop-blur-sm">
-              <span className="font-display text-[0.6rem] tracking-[0.3em] text-gold uppercase">Subha Muhurtham · Bapatla</span>
-              <span className="mt-0.5 text-xl text-cream">Saturday, 21 Nov · 8:52 PM</span>
+              <span className="font-display text-[0.6rem] tracking-[0.3em] text-gold uppercase">Grand Reception · Narasaraopet</span>
+              <span className="mt-0.5 text-xl text-cream">Sunday, 22 Nov · 8:00 PM</span>
             </div>
             <div className="flex gap-3">
               <a

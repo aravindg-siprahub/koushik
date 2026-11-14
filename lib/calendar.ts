@@ -38,7 +38,7 @@ export function buildIcs(): string {
 
 /** Google Calendar link for the muhurtham itself. */
 export function googleCalendarLink(): string {
-  const e = schedule.flatMap((d) => d.events).find((x) => x.highlight)!;
+  const e = schedule.flatMap((d) => d.events).find((x) => x.id === "wedding")!;
   const start = new Date(e.start);
   const end = new Date(start.getTime() + 3 * 3600_000);
   const params = new URLSearchParams({
