@@ -14,8 +14,8 @@ export function WeddingExperience({ children, tracks }: { children: React.ReactN
   const [ready, setReady] = useState(false);
 
   useEffect(() => {
-    const id = requestAnimationFrame(() => setReady(true));
-    return () => cancelAnimationFrame(id);
+    const id = window.setTimeout(() => setReady(true), 0);
+    return () => window.clearTimeout(id);
   }, []);
 
   return (

@@ -161,3 +161,11 @@ body {
     animation: none;
   }
 }
+
+/* hero entrance: pure CSS so the names show even before JavaScript runs */
+@keyframes hero-rise {
+  from { opacity: 0; transform: translateY(18px); }
+  to { opacity: 1; transform: none; }
+}
+.hero-rise { animation: hero-rise 0.9s cubic-bezier(0.22, 1, 0.36, 1) both; }
+@media (prefers-reduced-motion: reduce) { .hero-rise { animation: none; } }

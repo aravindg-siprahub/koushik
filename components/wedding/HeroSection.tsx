@@ -1,54 +1,34 @@
 "use client";
 
-import { motion, useReducedMotion, useScroll, useTransform, type Variants } from "framer-motion";
+import { motion, useReducedMotion, useScroll, useTransform } from "framer-motion";
 import { ChevronDown } from "lucide-react";
-import { useContext, useRef } from "react";
+import { useRef } from "react";
 import { blessing, couple, dateRangeLabel } from "@/config/wedding";
-import { HeroFrames } from "./HeroFrames";
 import { HeroSlideshow } from "./HeroSlideshow";
 import { Diya, Divider, Ganesha, JasmineStrand, Toran } from "./Motifs";
-import { InvitationOpenedContext } from "./WeddingExperience";
 
-const EASE = [0.22, 1, 0.36, 1] as const;
-
-const container: Variants = {
-  hidden: {},
-  show: { transition: { staggerChildren: 0.12, delayChildren: 0.9 } },
-};
-const item: Variants = {
-  hidden: { opacity: 0, y: 18 },
-  show: { opacity: 1, y: 0, transition: { duration: 0.9, ease: EASE } },
-};
-
-function AnimatedName({ text, show, delay, className }: { text: string; show: boolean; delay: number; className?: string }) {
+function AnimatedName({ text, delay, className }: { text: string; delay: number; className?: string }) {
   return (
     <span className={`block lg:inline-block ${className ?? ""}`} aria-label={text}>
       {text.split("").map((ch, i) => (
-        <motion.span
+        <span
           key={i}
           aria-hidden="true"
-          className="gold-text -mx-[0.1em] -my-[0.25em] inline-block px-[0.1em] py-[0.25em]"
-          initial={{ opacity: 0, y: 30 }}
-          animate={show ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
-          transition={{ duration: 0.7, delay: delay + i * 0.06, ease: EASE }}
+          className="hero-rise gold-text -mx-[0.1em] -my-[0.25em] inline-block px-[0.1em] py-[0.25em]"
+          style={{ animationDelay: `${delay + i * 0.06}s` }}
         >
           {ch}
-        </motion.span>
+        </span>
       ))}
     </span>
   );
 }
 
 /** Lord Ganesha in a glowing halo between two brass lamps — the first blessing on the page. */
-function DivineHeader({ show }: { show: boolean }) {
+function DivineHeader() {
   const reduce = useReducedMotion();
   return (
-    <motion.div
-      initial={{ opacity: 0, y: -12 }}
-      animate={show ? { opacity: 1, y: 0 } : undefined}
-      transition={{ duration: 1, ease: EASE }}
-      className="relative z-10 flex flex-col items-center text-center"
-    >
+    <div className="hero-rise relative z-10 flex flex-col items-center text-center">
       <div className="flex items-end justify-center gap-3 sm:gap-6">
         <Diya className="h-14 w-9 sm:h-16 sm:w-11" />
         <div className="relative grid h-24 w-24 place-items-center sm:h-28 sm:w-28">
@@ -68,12 +48,11 @@ function DivineHeader({ show }: { show: boolean }) {
         {blessing.telugu}
       </p>
       <p className="mt-0.5 font-display text-[0.58rem] tracking-[0.32em] text-gold uppercase sm:text-[0.62rem]">{blessing.invocationEnglish}</p>
-    </motion.div>
+    </div>
   );
 }
 
 export function HeroSection() {
-  const opened = useContext(InvitationOpenedContext);
   const reduce = useReducedMotion();
   const ref = useRef<HTMLElement>(null);
   const { scrollYProgress } = useScroll({ target: ref, offset: ["start start", "end start"] });
@@ -96,48 +75,35 @@ export function HeroSection() {
       </div>
 
       <div className="-mt-6 sm:-mt-4">
-        <DivineHeader show={opened} />
+        <DivineHeader />
       </div>
 
-      <motion.div style={{ opacity: fade }} className="relative flex flex-1 flex-col justify-center gap-4 pb-12 lg:gap-2 lg:pb-14">
-        {/* scrolling photo frames — first on phones, below the names on desktop */}
-        <motion.div
-          className="order-1 lg:order-2"
-          initial={{ opacity: 0, y: 24 }}
-          animate={opened ? { opacity: 1, y: 0 } : undefined}
-          transition={{ duration: 1.1, delay: 0.5, ease: EASE }}
+      <motion.div style={{ opacity: fade }} className="relative flex flex-1 flex-col justify-start gap-4 pt-4 pb-12 lg:justify-center lg:gap-2 lg:pt-0 lg:pb-14">
+        <div
+          className="mx-auto w-full max-w-3xl px-6"
         >
-          <HeroFrames />
-        </motion.div>
-
-        <motion.div
-          variants={container}
-          initial="hidden"
-          animate={opened ? "show" : "hidden"}
-          className="order-2 mx-auto w-full max-w-3xl px-6 lg:order-1"
-        >
-          <motion.p variants={item} className="mx-auto max-w-xl text-lg leading-snug text-cream/90 italic">
+          <p style={{ animationDelay: "0.2s" }} className="hero-rise mx-auto max-w-xl text-lg leading-snug text-cream/90 italic">
             With the blessings of our elders and hearts full of joy, we warmly invite you to the wedding celebrations of
-          </motion.p>
+          </p>
 
-          <motion.h1 id="hero-title" variants={item} className="mt-3 leading-[0.92] lg:mt-1">
-            <AnimatedName show={opened} delay={1.2} text={couple.groom.firstName} className="font-script text-[4.2rem] sm:text-[5.4rem] lg:text-[5.6rem]" />
-            <motion.span variants={item} className="-my-1 block font-display text-2xl text-champagne/90 sm:text-3xl lg:mx-5 lg:my-0 lg:inline-block lg:align-middle">
+          <h1 id="hero-title" className="mt-3 leading-[0.92] lg:mt-1">
+            <AnimatedName delay={0.5} text={couple.groom.firstName} className="font-script text-[4.2rem] sm:text-[5.4rem] lg:text-[5.6rem]" />
+            <span style={{ animationDelay: "0.9s" }} className="hero-rise -my-1 block font-display text-2xl text-champagne/90 sm:text-3xl lg:mx-5 lg:my-0 lg:inline-block lg:align-middle">
               &amp;
-            </motion.span>
-            <AnimatedName show={opened} delay={1.7} text={couple.bride.firstName} className="font-script text-[4.2rem] sm:text-[5.4rem] lg:text-[5.6rem]" />
-          </motion.h1>
+            </span>
+            <AnimatedName delay={1} text={couple.bride.firstName} className="font-script text-[4.2rem] sm:text-[5.4rem] lg:text-[5.6rem]" />
+          </h1>
 
-          <motion.p variants={item} lang="te" className="mt-2 font-telugu text-lg text-champagne/90">
+          <p style={{ animationDelay: "1.4s" }} lang="te" className="hero-rise mt-2 font-telugu text-lg text-champagne/90">
             {couple.groom.telugu} <span className="text-gold">❀</span> {couple.bride.telugu}
-          </motion.p>
+          </p>
 
-          <motion.div variants={item}>
+          <div style={{ animationDelay: "1.55s" }} className="hero-rise">
             <Divider className="mx-auto mt-3 h-5 w-52" />
             <p className="mt-2 font-display text-[0.95rem] tracking-[0.22em] text-champagne uppercase sm:text-lg">{dateRangeLabel}</p>
-          </motion.div>
+          </div>
 
-          <motion.div variants={item} className="mt-5 flex flex-col items-center justify-center gap-4 sm:flex-row sm:gap-5">
+          <div style={{ animationDelay: "1.7s" }} className="hero-rise mt-5 flex flex-col items-center justify-center gap-4 sm:flex-row sm:gap-5">
             <div className="inline-flex flex-col items-center rounded-2xl border border-gold/50 bg-burgundy/55 px-6 py-2.5 backdrop-blur-sm">
               <span className="font-display text-[0.6rem] tracking-[0.3em] text-gold uppercase">Subha Muhurtham · Bapatla</span>
               <span className="mt-0.5 text-xl text-cream">Saturday, 21 Nov · 8:52 PM</span>
@@ -156,8 +122,8 @@ export function HeroSection() {
                 Venues
               </a>
             </div>
-          </motion.div>
-        </motion.div>
+          </div>
+        </div>
       </motion.div>
 
       <motion.a

@@ -7,8 +7,6 @@ import { audio as audioConfig } from "@/config/wedding";
 import type { Track } from "@/lib/tracks";
 import { VIDEO_EVENT, type VideoEventDetail } from "./VideoModal";
 
-const PAUSED_KEY = "ks-music-paused";
-
 /**
  * Plays the wedding song as soon as the site opens. Browsers block sound until the guest
  * interacts, so if autoplay is refused the music starts on the first tap, click or key press.
@@ -16,6 +14,8 @@ const PAUSED_KEY = "ks-music-paused";
  */
 export function MusicPlayer({ tracks }: { tracks: Track[] }) {
   const ref = useRef<HTMLAudioElement | null>(null);
+  /** True only after the guest pauses the music with the music button (lasts until reload). */
+  const userPaused = useRef(false);
   const [index, setIndex] = useState(0);
   const [playing, setPlaying] = useState(false);
   const [waiting, setWaiting] = useState(false);
@@ -43,17 +43,14 @@ export function MusicPlayer({ tracks }: { tracks: Track[] }) {
   // Try to start immediately; otherwise wait for the guest's first interaction.
   useEffect(() => {
     if (!track) return;
-    try {
-      if (sessionStorage.getItem(PAUSED_KEY) === "1") return;
-    } catch {
-      /* storage unavailable */
-    }
 
     let done = false;
     // Every event browsers accept as a "user gesture" for starting sound.
     const events = ["pointerdown", "mousedown", "click", "keydown", "touchend"] as const;
-    const onInteract = async () => {
-      if (done) return;
+    const onInteract = async (e: Event) => {
+      if (done || userPaused.current) return;
+      // Taps on the music button itself are handled by its own toggle.
+      if (e.target instanceof Element && e.target.closest("[data-music-control]")) return;
       if (await play()) {
         done = true;
         events.forEach((e) => document.removeEventListener(e, onInteract, true));
@@ -102,15 +99,11 @@ export function MusicPlayer({ tracks }: { tracks: Track[] }) {
     const el = ref.current;
     if (!el) return;
     if (el.paused) {
-      try {
-        sessionStorage.removeItem(PAUSED_KEY);
-      } catch {}
+      userPaused.current = false;
       void play();
     } else {
+      userPaused.current = true;
       el.pause();
-      try {
-        sessionStorage.setItem(PAUSED_KEY, "1");
-      } catch {}
     }
   };
 
@@ -130,6 +123,7 @@ export function MusicPlayer({ tracks }: { tracks: Track[] }) {
         onError={() => setIndex((i) => (i + 1 < tracks.length ? i + 1 : i))}
       />
       <div
+        data-music-control=""
         className="fixed z-40 flex items-center gap-2"
         style={{ right: "max(12px, env(safe-area-inset-right))", bottom: "max(14px, env(safe-area-inset-bottom))" }}
       >

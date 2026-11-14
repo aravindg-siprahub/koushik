@@ -276,7 +276,7 @@ export const audio = {
   /** Display titles by filename; other files are titled from their filename. */
   titles: {
     "wedding-song.mp3": "Kalyanam Vaibhogam · Srinivasa Kalyanam",
-    "ubhaya-kusala-chirajeevana.mp3": "Ubhaya Kusala Chirajeevana",
+    "wedding-music.mp3": "Koushik weds Srija",
   } as Record<string, string>,
   volume: 0.6,
 };
